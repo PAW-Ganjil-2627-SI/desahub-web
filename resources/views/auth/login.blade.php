@@ -43,7 +43,6 @@
                             href="{{ url('/login') }}">Login</a>
                     </li>
                 @endauth
-
                 </ul>
             </div>
         </div>
@@ -56,11 +55,8 @@
                     <div class="form-card">
                         <h2 class="h4 fw-bold mb-3 border-bottom pb-2">Login Aparat Desa</h2>
 
-                        @if ($errors->any())
-                            <div class="alert alert-danger">{{ $errors->first() }}</div>
-                        @endif
-
- <form action="{{ route('login.proses') }}" method="POST">
+                       
+                            <form action="{{ route('login.proses') }}" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label for="username" class="form-label fw-semibold">Username</label>

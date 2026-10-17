@@ -43,38 +43,36 @@
                             href="{{ url('/login') }}">Login</a>
                     </li>
                 @endauth
-
                 </ul>
             </div>
         </div>
     </nav>
+
 
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-6">
                 <div class="card shadow-sm p-4">
                     <h3 class="fw-bold mb-3 border-bottom pb-2">Edit Pengaduan</h3>
-                    <form action="{{ route('pengaduan.update', $pengaduan) }}" method="POST">
+                    <form action="{{ route('pengaduan.update', $pengaduan) }} " method="POST">
                         @csrf
                         @method('PUT')
 
-
-                        <input type="hidden" name="id" value="<?= $pengaduan['id']; ?>">
-
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Nama Lengkap</label>
-                            <input type="text" class="form-control" name="nama" value="{{ old('nama', $pengaduan->nama) }}"  required>
+                            <input type="text" class="form-control" name="nama" value="{{ old('nama', $pengaduan->nama) }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Alamat Email</label>
-                            <input type="email" class="form-control" name="email" value="{{ old('email', $pengaduan->email) }}"  required>
+                            <input type="email" class="form-control" name="email"
+                                value="{{ old('email', $pengaduan->email) }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Kategori Aduan</label>
                             <select class="form-select" name="kategori" required>
-                            <option value="Jalan Rusak"
+                                <option value="Jalan Rusak"
                                     @selected($pengaduan->kategori == 'Jalan Rusak')>
                                     Jalan Rusak</option>
                                 <option value="Lampu Penerangan"
@@ -89,14 +87,13 @@
                                 <option value="Lainnya"
                                     @selected($pengaduan->kategori == 'Lainnya')>
                                     Lainnya</option>
-
                             </select>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Status Aduan</label>
                             <select class="form-select" name="status" required>
-                            <option value="Pending"
+                                <option value="Pending"
                                     @selected($pengaduan->status == 'Pending')>
                                     Pending</option>
                                 <option value="Diproses"
@@ -105,18 +102,17 @@
                                 <option value="Selesai"
                                     @selected($pengaduan->status == 'Selesai')>
                                     Selesai</option>
-
                             </select>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Deskripsi Laporan</label>
-                            <textarea class="form-control" name="deskripsi" rows="4" required>{{ old('deskripsi', $pengaduan->deskripsi) }}</textarea>
-
+                            <textarea class="form-control" name="deskripsi" rows="4"
+                                required>{{ old('deskripsi', $pengaduan->deskripsi) }}</textarea>
                         </div>
 
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('pengaduan.daftar') }}"  class="btn btn-secondary">Batal</a>
+                            <a href="{{ route('pengaduan.daftar') }}" class="btn btn-secondary">Batal</a>
                             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
                         </div>
                     </form>

@@ -43,37 +43,37 @@
                             href="{{ url('/login') }}">Login</a>
                     </li>
                 @endauth
-
                 </ul>
             </div>
         </div>
     </nav>
 
     <!-- Konten Utama Daftar Aduan -->
-    <main class="container py-5">
-        <div class="mb-4">
-            <h1 class="h3 fw-bold mb-1">Daftar Pengaduan Warga</h1>
-            <p class="text-muted">Rekapitulasi laporan dan aspirasi masyarakat Desa Sukamaju yang masuk ke
-                sistem.</p>
-        </div>
+    <main class="py-5">
+        <div class="container">
+            <div class="mb-4">
+                <h1 class="h3 fw-bold mb-1">Daftar Pengaduan Warga</h1>
+                <p class="text-muted">Rekapitulasi laporan dan aspirasi masyarakat Desa Sukamaju yang masuk ke sistem.</p>
+            </div>
 
-        <div class="table-responsive bg-white p-3 border rounded-1">
-            <table class="table table-bordered table-striped align-middle mb-0">
-                <thead class="table-light">
-                    <tr>
-                        <th scope="col" class="text-center" style="width: 5%;">No</th>
-                        <th scope="col" style="width: 12%;">Tanggal</th>
-                        <th scope="col" style="width: 15%;">Pelapor</th>
-                        <th scope="col" style="width: 15%;">Kategori</th>
-                        <th scope="col" style="width: 28%;">Ringkasan</th>
-                        <th scope="col" class="text-center" style="width: 10%;">Status</th>
-                        @auth
-                        <th scope="col" class="text-center" style="width: 15%;">Aksi</th>
-                        @endauth
+            <!-- Tabel Daftar Aduan -->
+            <div class="table-responsive bg-white p-3 border rounded-1">
+                <table class="table table-bordered table-striped align-middle mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col" class="text-center" style="width: 5%;">No</th>
+                            <th scope="col" style="width: 12%;">Tanggal</th>
+                            <th scope="col" style="width: 15%;">Pelapor</th>
+                            <th scope="col" style="width: 15%;">Kategori</th>
+                            <th scope="col" style="width: 28%;">Ringkasan</th>
+                            <th scope="col" class="text-center" style="width: 10%;">Status</th>
+                            @auth
+                            <th scope="col" class="text-center" style="width: 15%;">Aksi</th>
+                            @endauth
 
-                    </tr>
-                </thead>
-                <tbody>
+                        </tr>
+                    </thead>
+                    <tbody>
                     @foreach ($pengaduan as $item)
                         <tr>
                             <td class="text-center">{{ $loop->iteration }}</td>
@@ -82,24 +82,30 @@
                             <td>{{ $item->kategori }}</td>
                             <td>{{ $item->deskripsi }}</td>
                             <td class="text-center">
-                                <span class="badge {{ $item->badgeClass() }} px-2 py-1">
-                                    {{ $item->statusLabel() }}</span>
+                                @if ($item->status == 'Diproses')
+                                    <span class="badge bg-info text-dark px-2 py-1">Diproses</span>
+                                @elseif ($item->status == 'Selesai')
+                                    <span class="badge bg-success px-2 py-1">Selesai</span>
+                                @else
+                                    <span class="badge bg-warning text-dark px-2 py-1">Pending</span>
+                                @endif
                             </td>
                             @auth
                             <td class="text-center">
                                 <a href="{{ route('pengaduan.edit', $item) }}"
                                     class="btn btn-sm btn-warning me-1">Edit</a>
-                                <form action="{{ route('pengaduan.destroy', $item) }}" method="POST"
+
+                                    <form action="{{ route('pengaduan.destroy', $item) }}" method="POST"
                                     class="d-inline"
                                     onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengaduan ini?')">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                                 </form>
+
                             </td>
                             @endauth
 
-                            
 
                         </tr>
                     @endforeach
@@ -109,7 +115,23 @@
                             <td colspan="7" class="text-center text-muted py-4">Belum ada pengaduan yang masuk.</td>
                         </tr>
                     @endif
-                </tbody>
-            </table>
+
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="footer-custom text-center">
+        <div class="container">
+            <p class="mb-0">Kantor Pemerintah Desa Sukamaju: Jl. Raya Sukamaju No. 12, Kecamatan Dayeuhkolot, Kabupaten
+                Bandung, Jawa Barat 12345 | &copy; 2026 DesaHub Sukamaju</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

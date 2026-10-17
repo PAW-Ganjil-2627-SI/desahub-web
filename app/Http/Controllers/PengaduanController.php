@@ -2,17 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Pengaduan;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use App\Models\Pengaduan;
+
 
 class PengaduanController extends Controller
 {
-	   public function daftar()
-    {
-        $pengaduan = Pengaduan::orderByDesc('id')->get();
-
-        return view('pengaduan.daftar', compact('pengaduan'));
+    public function daftar(){
+        $pengaduan =  Pengaduan::orderByDesc('id')->get();
+        return view ('pengaduan.daftar', compact('pengaduan'));
     }
 
     public function index()
@@ -20,7 +18,8 @@ class PengaduanController extends Controller
         return view('pengaduan.index');
     }
 
-    public function store(Request $request)
+    
+public function store(Request $request)
     {
         $data = $request->validate([
             'nama' => 'required|max:100',
@@ -30,7 +29,7 @@ class PengaduanController extends Controller
         ]);
 
         $data['status'] = 'Pending'; 
-        Pengaduan::create($data);
+	  Pengaduan::create($data);
 
         return redirect()->route('pengaduan.daftar')->with('success', 'Pengaduan berhasil dikirim.');
     }
@@ -63,5 +62,5 @@ class PengaduanController extends Controller
     }
 
 
-    
+
 }

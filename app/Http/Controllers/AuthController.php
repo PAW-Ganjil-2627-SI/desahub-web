@@ -23,27 +23,24 @@ class AuthController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-                
-                if (Auth::attempt($credentials, $request->boolean('remember'))) {
-                    $request->session()->regenerate();
-        
-                    return redirect()->intended(route('pengaduan.daftar'))
-                        ->with('success', 'Selamat datang, ' . Auth::user()->username . '!');
-                }
-        
-                return back()
-                    ->withErrors(['username' => 'Username atau password salah.'])
-                    ->onlyInput('username');
-            }
-        
-           
-            public function logout(Request $request)
-            {
-                Auth::logout();
-                $request->session()->invalidate();
-                $request->session()->regenerateToken();
-        
-                return redirect()->route('home')->with('success', 'Anda berhasil logout.');
-            }
+		if (Auth::attempt($credentials, $request->boolean('remember'))) {
+            $request->session()->regenerate();
+
+            return redirect()->intended(route('pengaduan.daftar'))
+                ->with('success', 'Selamat datang, ' . Auth::user()->username . '!');
         }
-        
+
+        return back()
+            ->withErrors(['username' => 'Username atau password salah.'])
+            ->onlyInput('username');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('home')->with('success', 'Anda berhasil logout.');
+    }
+}
