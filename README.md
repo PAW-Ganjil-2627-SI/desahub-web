@@ -1,127 +1,58 @@
-# DesaHub — Platform Pengaduan Warga Desa Sukamaju
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-> Sistem informasi berbasis web untuk menyampaikan pengaduan, aspirasi, dan laporan kerusakan fasilitas umum secara transparan kepada pemerintah desa.
+<p align="center">
+<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+</p>
 
----
+## About Laravel
 
-## 📋 Deskripsi Proyek
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-**DesaHub** adalah platform layanan pengaduan warga digital untuk **Desa Sukamaju, Kecamatan Dayeuhkolot, Kabupaten Bandung**. Platform ini memungkinkan warga desa untuk melaporkan berbagai permasalahan infrastruktur dan fasilitas umum secara mudah dan transparan, serta memantau status penanganan laporan yang telah dikirimkan.
+- [Simple, fast routing engine](https://laravel.com/docs/routing).
+- [Powerful dependency injection container](https://laravel.com/docs/container).
+- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+- [Robust background job processing](https://laravel.com/docs/queues).
+- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Proyek ini dikembangkan sebagai tugas mata kuliah **Web Application Development (WAD)**.
+Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
----
+## Learning Laravel
 
-## ✨ Fitur Utama
+Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-- **Formulir Pengaduan Warga** — Warga dapat mengisi laporan lengkap dengan nama, email, kategori aduan, deskripsi, dan foto bukti.
-- **Daftar Rekapitulasi Aduan** — Menampilkan seluruh laporan yang masuk dalam bentuk tabel dengan status terkini.
-- **Status Laporan** — Setiap aduan memiliki status: `Pending`, `Diproses`, atau `Selesai`.
-- **Desain Responsif** — Tampilan menyesuaikan layar desktop maupun perangkat mobile.
+In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
----
+You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
 
-## 🗂️ Struktur Proyek
+## Agentic Development
 
-```
-desahub-web/
-├── index.html          # Halaman utama (profil desa & formulir pengaduan)
-├── daftar-aduan.html   # Halaman rekapitulasi daftar pengaduan
-├── css/
-│   └── style.css       # Kustomisasi tampilan (CSS tambahan)
-├── assets/
-│   ├── desa.jpg        # Foto kantor/area Desa Sukamaju
-│   └── icon_title.png  # Ikon tab browser
-└── ReadMe.md           # Dokumentasi proyek ini
-```
-
----
-
-## 🛠️ Teknologi yang Digunakan
-
-| Teknologi | Versi | Keterangan |
-|---|---|---|
-| HTML5 | — | Struktur halaman & semantik |
-| CSS3 | — | Kustomisasi tampilan (`style.css`) |
-| Bootstrap | 5.3.3 | Framework CSS via CDN |
-| Plus Jakarta Sans | — | Tipografi via Google Fonts |
-
-> Seluruh dependensi eksternal (Bootstrap & Google Fonts) dimuat via CDN — tidak diperlukan instalasi npm/node.
-
----
-
-## 🚀 Cara Menjalankan
-
-Proyek ini adalah website statis yang **tidak memerlukan instalasi** atau build tool apapun.
-
-1. **Clone atau unduh** repositori ini.
-2. **Buka** file `index.html` langsung di browser (double-click), **atau** gunakan ekstensi **Live Server** di VS Code untuk pengalaman pengembangan yang lebih baik.
+Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
 
 ```bash
-# Jika menggunakan VS Code + Live Server:
-# Klik kanan pada index.html -> "Open with Live Server"
+composer require laravel/boost --dev
+
+php artisan boost:install
 ```
 
----
+Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
 
-## 📄 Halaman-Halaman
+## Contributing
 
-### 1. Beranda (`index.html`)
-- Profil singkat Desa Sukamaju beserta foto kantor desa.
-- Formulir pengaduan warga dengan kolom:
-  - **Nama Lengkap**
-  - **Alamat Email**
-  - **Kategori Aduan** (Jalan Rusak, Lampu Penerangan, Fasilitas Umum, Kebersihan, Lainnya)
-  - **Deskripsi Laporan**
-  - **Unggah Foto Bukti** (JPG, PNG, JPEG)
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-### 2. Daftar Aduan (`daftar-aduan.html`)
-- Tabel rekapitulasi seluruh laporan yang masuk ke sistem.
-- Kolom: No, Tanggal, Pelapor, Kategori, Ringkasan, Status.
-- Badge status berwarna:
-  - **Pending** — laporan baru diterima, belum diproses.
-  - **Diproses** — laporan sedang ditangani oleh pihak desa.
-  - **Selesai** — laporan telah selesai ditindaklanjuti.
+## Code of Conduct
 
----
+In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
 
-## 🎨 Desain & Tampilan
+## Security Vulnerabilities
 
-Proyek menggunakan palet warna yang terinspirasi dari nuansa alam pedesaan:
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
 
-| Variabel CSS | Nilai | Keterangan |
-|---|---|---|
-| `--primary-color` | `#2F5D50` | Hijau tua — warna utama navbar & tombol |
-| `--primary-hover` | `#24483E` | Hijau lebih gelap — efek hover tombol |
-| `--accent-color` | `#ECB349` | Kuning emas — aksen & badge "Diproses" |
-| `--bg-color` | `#FAFAF7` | Krem putih — latar belakang halaman |
+## License
 
-Font: **Plus Jakarta Sans** (Google Fonts)
-
----
-
-## 📁 Kategori Aduan
-
-Warga dapat mengajukan pengaduan pada kategori berikut:
-
-- **Jalan Rusak** — jalan berlubang, paving block rusak, dsb.
-- **Lampu Penerangan** — lampu jalan mati atau tidak berfungsi.
-- **Fasilitas Umum** — kerusakan pos ronda, balai warga, posyandu, dsb.
-- **Kebersihan** — tumpukan sampah liar, saluran air tersumbat, dsb.
-- **Lainnya** — permasalahan di luar kategori di atas.
-
----
-
-## 👨‍💻 Informasi Pengembang
-
-| | |
-|---|---|
-| **Mata Kuliah** | Web Application Development (WAD) |
-| **Lokasi** | Desa Sukamaju, Kec. Dayeuhkolot, Kab. Bandung, Jawa Barat 12345 |
-| **Tahun** | 2026 |
-
----
-
-## 📜 Lisensi
-
-Proyek ini dibuat untuk keperluan akademik. Seluruh konten dan kode dalam repositori ini bersifat edukatif.
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
