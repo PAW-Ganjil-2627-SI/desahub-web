@@ -41,13 +41,20 @@ public function store(Request $request)
 
     public function update(Request $request, Pengaduan $pengaduan)
     {
-        $data = $request->validate([
-            'nama' => 'required|max:100',
-            'email' => 'required|email|max:50',
-            'kategori' => 'required|in:Jalan Rusak,Lampu Penerangan,Fasilitas Umum,Kebersihan,Lainnya',
-            'status' => 'required|in:Pending,Diproses,Selesai',
-            'deskripsi' => 'required|max:200',
-        ]);
+        // Admin boleh mengubah semua field, petugas hanya status
+        if ($request->user()->can('updateDetail', $pengaduan)) {
+            $data = $request->validate([
+                'nama' => 'required|max:100',
+                'email' => 'required|email|max:50',
+                'kategori' => 'required|in:Jalan Rusak,Lampu Penerangan,Fasilitas Umum,Kebersihan,Lainnya',
+                'status' => 'required|in:Pending,Diproses,Selesai',
+                'deskripsi' => 'required|max:200',
+            ]);
+        } else {
+            $data = $request->validate([
+                'status' => 'required|in:Pending,Diproses,Selesai',
+            ]);
+        }
 
         $pengaduan->update($data);
 

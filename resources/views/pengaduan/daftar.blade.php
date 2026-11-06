@@ -92,9 +92,12 @@
                             </td>
                             @auth
                             <td class="text-center">
+                                @can('update', $item)
                                 <a href="{{ route('pengaduan.edit', $item) }}"
                                     class="btn btn-sm btn-warning me-1">Edit</a>
+                                @endcan
 
+                                @can('delete', $item)
                                     <form action="{{ route('pengaduan.destroy', $item) }}" method="POST"
                                     class="d-inline"
                                     onsubmit="return confirm('Apakah Anda yakin ingin menghapus pengaduan ini?')">
@@ -102,6 +105,7 @@
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
                                 </form>
+                                @endcan
 
                             </td>
                             @endauth

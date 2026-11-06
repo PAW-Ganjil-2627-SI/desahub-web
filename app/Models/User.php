@@ -29,6 +29,19 @@ class User extends Authenticatable
     ];
 
     /**
+     * Cek apakah user memiliki salah satu role yang diberikan.
+     */
+    public function hasRole(string ...$roles): bool
+    {
+        return in_array($this->role, $roles, true);
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->hasRole('admin');
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>

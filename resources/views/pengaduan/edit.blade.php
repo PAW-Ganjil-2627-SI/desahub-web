@@ -54,24 +54,32 @@
             <div class="col-lg-6">
                 <div class="card shadow-sm p-4">
                     <h3 class="fw-bold mb-3 border-bottom pb-2">Edit Pengaduan</h3>
+                    @cannot('updateDetail', $pengaduan)
+                        <div class="alert alert-info py-2">
+                            Sebagai <strong>{{ Auth::user()->role }}</strong>, Anda hanya dapat mengubah status pengaduan.
+                        </div>
+                    @endcannot
+                    @if ($errors->any())
+                        <div class="alert alert-danger py-2">{{ $errors->first() }}</div>
+                    @endif
                     <form action="{{ route('pengaduan.update', $pengaduan) }} " method="POST">
                         @csrf
                         @method('PUT')
 
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Nama Lengkap</label>
-                            <input type="text" class="form-control" name="nama" value="{{ old('nama', $pengaduan->nama) }}" required>
+                            <input type="text" class="form-control" name="nama" @cannot('updateDetail', $pengaduan) disabled @endcannot value="{{ old('nama', $pengaduan->nama) }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Alamat Email</label>
-                            <input type="email" class="form-control" name="email"
+                            <input type="email" class="form-control" name="email" @cannot('updateDetail', $pengaduan) disabled @endcannot
                                 value="{{ old('email', $pengaduan->email) }}" required>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Kategori Aduan</label>
-                            <select class="form-select" name="kategori" required>
+                            <select class="form-select" name="kategori" @cannot('updateDetail', $pengaduan) disabled @endcannot required>
                                 <option value="Jalan Rusak"
                                     @selected($pengaduan->kategori == 'Jalan Rusak')>
                                     Jalan Rusak</option>
@@ -107,7 +115,7 @@
 
                         <div class="mb-3">
                             <label class="form-label fw-semibold">Deskripsi Laporan</label>
-                            <textarea class="form-control" name="deskripsi" rows="4"
+                            <textarea class="form-control" name="deskripsi" @cannot('updateDetail', $pengaduan) disabled @endcannot rows="4"
                                 required>{{ old('deskripsi', $pengaduan->deskripsi) }}</textarea>
                         </div>
 

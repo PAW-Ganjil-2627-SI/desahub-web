@@ -9,10 +9,7 @@ class AuthController extends Controller
 {
 	public function showLogin()
     {
-        if (Auth::check()) {
-            return redirect()->route('pengaduan.daftar');
-        }
-
+        // Redirect untuk user yang sudah login ditangani middleware "guest"
         return view('auth.login');
     }
 

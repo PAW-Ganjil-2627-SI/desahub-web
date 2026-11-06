@@ -201,7 +201,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `role`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'admin', '$2y$12$s379LRfwQDQo137Sm2bMXeU0wTU/nMKWTK2dgTL4caJxTEnnL391q', 'admin', NULL, '2026-10-16 10:11:16', '2026-10-17 05:10:17');
+(1, 'admin', '$2y$12$s379LRfwQDQo137Sm2bMXeU0wTU/nMKWTK2dgTL4caJxTEnnL391q', 'admin', NULL, '2026-10-16 10:11:16', '2026-10-17 05:10:17'),
+(2, 'petugas', '$2y$12$gLWuSltcVX6Tbh4nMufbiO6.Mp9L/JfyVZOmuKIw7pLY7sRBCupuO', 'petugas', NULL, '2026-11-06 00:00:00', '2026-11-06 00:00:00');
 
 --
 -- Indexes for dumped tables
