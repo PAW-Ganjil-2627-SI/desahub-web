@@ -4,9 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Pengaduan;
 use App\Models\User;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Schema;
 use Tests\TestCase;
 
 class MiddlewareAuthorizationTest extends TestCase
@@ -18,17 +16,6 @@ class MiddlewareAuthorizationTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-
-        // Tabel pengaduan belum punya migration (dibuat lewat db_desahub.sql)
-        Schema::create('pengaduan', function (Blueprint $table) {
-            $table->id();
-            $table->string('nama', 100);
-            $table->string('email', 50);
-            $table->string('kategori');
-            $table->string('deskripsi', 200);
-            $table->string('status')->default('Pending');
-            $table->timestamp('created_at')->nullable();
-        });
 
         $this->pengaduan = Pengaduan::create([
             'nama' => 'Budi',

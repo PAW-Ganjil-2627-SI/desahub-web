@@ -9,14 +9,17 @@ use Illuminate\Contracts\Queue\ShouldBeEncrypted;
 use Illuminate\Contracts\Queue\ShouldQueueAfterCommit;
 use Illuminate\Queue\Attributes\Backoff;
 use Illuminate\Queue\Attributes\Connection;
+use Illuminate\Queue\Attributes\CountCrashesAsExceptions;
 use Illuminate\Queue\Attributes\DeleteWhenMissingModels;
 use Illuminate\Queue\Attributes\FailOnTimeout;
 use Illuminate\Queue\Attributes\MaxExceptions;
 use Illuminate\Queue\Attributes\Queue as QueueAttribute;
 use Illuminate\Queue\Attributes\ReadsQueueAttributes;
+use Illuminate\Queue\Attributes\RetryFor;
 use Illuminate\Queue\Attributes\Timeout;
 use Illuminate\Queue\Attributes\Tries;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Carbon;
 
 class SendQueuedMailable
 {
@@ -70,6 +73,13 @@ class SendQueuedMailable
     public $failOnTimeout = false;
 
     /**
+     * Indicates if worker crashes should count towards the maximum exceptions.
+     *
+     * @var bool
+     */
+    public $countCrashesAsExceptions = false;
+
+    /**
      * Create a new job instance.
      *
      * @param  \Illuminate\Contracts\Mail\Mailable  $mailable
@@ -92,6 +102,7 @@ class SendQueuedMailable
         $this->tries = $this->getAttributeValue($mailable, Tries::class, 'tries');
         $this->deleteWhenMissingModels = $this->getAttributeValue($mailable, DeleteWhenMissingModels::class, 'deleteWhenMissingModels') ?? false;
         $this->failOnTimeout = $this->getAttributeValue($mailable, FailOnTimeout::class, 'failOnTimeout') ?? false;
+        $this->countCrashesAsExceptions = $this->getAttributeValue($mailable, CountCrashesAsExceptions::class, 'countCrashesAsExceptions') ?? false;
     }
 
     /**
@@ -129,7 +140,9 @@ class SendQueuedMailable
     public function retryUntil()
     {
         if (! method_exists($this->mailable, 'retryUntil') && ! isset($this->mailable->retryUntil)) {
-            return;
+            $retryFor = $this->getAttributeValue($this->mailable, RetryFor::class);
+
+            return is_null($retryFor) ? null : Carbon::now()->addSeconds($retryFor);
         }
 
         return $this->mailable->retryUntil ?? $this->mailable->retryUntil();
